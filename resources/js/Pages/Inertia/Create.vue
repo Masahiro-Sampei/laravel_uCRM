@@ -1,27 +1,29 @@
 <script setup>
 import { reactive } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
+import  ValidationErrors  from '@/Components/ValidationErrors.vue';
 
 defineProps({
-    errors:Object
+    errors: Object
 })
 
-const form =reactive({
+const form = reactive({
     title: null,
-    content:null
+    content: null
 })
-const submitFunction =()=>{
-    Inertia.post('/inertia',form)
+const submitFunction = () => {
+    Inertia.post('/inertia', form)
 }
 </script>
 
 <template>
-
-    <form @submit.prevent="submitFunction"><br>
-        <input type="text" name="title" v-model="form.title"><br>
-        <div v-if="errors.title">{{ errors.title }}</div>
-        <input type="text" name="content" v-model="form.content">
-        <div v-if="errors.content">{{ errors.content }}</div>
-        <button>送信</button>
-    </form>
+    <ValidationErrors :errors="errors" />
+        <form @submit.prevent="submitFunction"><br>
+            <input type="text" name="title" v-model="form.title"><br>
+            <div v-if="errors.title">{{ errors.title }}</div>
+            <input type="text" name="content" v-model="form.content">
+            <div v-if="errors.content">{{ errors.content }}</div><br>
+            <button>送信</button>
+        </form>
+   
 </template>
