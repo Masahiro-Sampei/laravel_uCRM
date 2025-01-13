@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
 use Inertia\Inertia;
-use function Termwind\render;
 
 class ItemController extends Controller
 {
@@ -96,7 +95,8 @@ class ItemController extends Controller
      */
     public function update(UpdateItemRequest $request, Item $item)
     {
-        dd($request->name, $item->name);
+        
+        dd($request);
         $item->name = $request->name;
         $item->memo = $request->memo;
         $item->price = $request->price;
@@ -117,6 +117,11 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        $item->delete();
+        return to_route('items.index')
+        ->with([
+            'message' => '削除しました。',
+            'status' => 'danger'
+        ]);
     }
 }

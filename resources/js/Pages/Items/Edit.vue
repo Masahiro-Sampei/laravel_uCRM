@@ -17,7 +17,8 @@ const form = reactive({
     is_seling: props.item.is_selling
 })
 const updateItem = id => {
-    Inertia.put(route('items.update', { item: id }), form)
+    console.log(id);
+    Inertia.put(route('items.update', { item: id }), form);
 }
 </script>
 
