@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Purchase;
 
 class Customer extends Model
 {
@@ -26,7 +27,7 @@ class Customer extends Model
      * スコープメソッド: 顧客検索のクエリを構築する
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     *        現在のクエリビルダーインスタンス
+     *        
      * @param string|null $input
      *        検索条件として使用する入力値（kana または tel に一致する文字列）
      * @return \Illuminate\Database\Eloquent\Builder|null
@@ -48,4 +49,9 @@ class Customer extends Model
         }
     }
 
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
 }
